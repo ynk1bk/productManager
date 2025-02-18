@@ -117,6 +117,7 @@ namespace ProductManager
             this.button2.TabIndex = 9;
             this.button2.Text = "Удалить";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // button3
             // 
@@ -126,6 +127,7 @@ namespace ProductManager
             this.button3.TabIndex = 10;
             this.button3.Text = "Проверить";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.checkButton_Click);
             // 
             // MainWindow
             // 
