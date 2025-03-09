@@ -27,7 +27,7 @@ namespace ProductManager
                     MessageBox.Show("Количество не может быть отрицательным!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+                
                 Product product = new Product(name, price, quantity);
                 products.Add(product);
                 MessageBox.Show("Товар добавлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -81,6 +81,46 @@ namespace ProductManager
             }
         }
 
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (productsList.SelectedIndex >= 0)
+                {
+                    // Получаем выбранный товар
+                    Product selectedProduct = products[productsList.SelectedIndex];
+
+                    // Обновляем данные товара из текстовых полей
+                    selectedProduct.Name = nameTextBox.Text;
+                    selectedProduct.Price = numericUpDown1.Value;
+                    selectedProduct.Quantity = (int)numericUpDown2.Value;
+
+                    // Обновляем список товаров
+                    UpdateProductList();
+                    MessageBox.Show("Товар отредактирован!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Выберите товар для редактирования!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void productsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (productsList.SelectedIndex >= 0)
+            {
+                Product selectedProduct = products[productsList.SelectedIndex];
+                nameTextBox.Text = selectedProduct.Name;
+                numericUpDown1.Value = selectedProduct.Price;
+                numericUpDown2.Value = selectedProduct.Quantity;
+            }
+        }
+
         private void UpdateProductList()
         {
             productsList.Items.Clear();
@@ -101,5 +141,6 @@ namespace ProductManager
         private Label label4;
         private Button button2;
         private Button button3;
+        private Button button4;
     }
 }
